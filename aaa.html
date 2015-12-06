@@ -8,12 +8,14 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link href="" rel="stylesheet">
+    <script src="./js/jquery.js"></script>
     <script type="text/javascript" charset="utf-8">
-    
+    var access_token = 19 dd668c64f808d328d4f54fc5212a91;
+    //获取温度  https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91
     var getTemperature = function() {
         console.log("refresh device");
 
-        $http.post('http://api.easylink.io/v1/device/devices', null, {
+        $http.post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?', null, {
             headers: {
                 'AUTHORIZATION': "token " + access_token
             }
@@ -36,6 +38,7 @@
 
 
 
+
     console.log = (function(old_funct) {
         return function(text) {
             old_funct(text);
@@ -46,8 +49,31 @@
 </head>
 
 <body>
+    <h1>test</h1>
+    <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
+        <div class="button-bar">
+            <a class="button" style="background:white; color:black" id="test1">test1</a>
+            <a class="button" style="background:black; color:white" id="test2">test2</a>
+        </div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    function test1() {
+        var topic = device_id + '/in/write';
+        var commond = '{"11":"' + 'flashnode' + '"}';
+        console.log("test1");
 
-<h1>test</h1>
+
+    }
+    document.querySelector('#test1').addEventListener('click', test1);
+
+    //led off
+    function test2() {
+        var topic = device_id + '/in/write';
+        var commond = '{"11":"' + 'off' + '"}';
+        console.log("test2");
+    }
+    document.querySelector('#test2').addEventListener('click', test2);
+    </script>
 </body>
 
 </html>
