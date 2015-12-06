@@ -56,7 +56,7 @@
                 console.log(jsonData.msg);
 
 
-				document.getElementById('temperature').innerHTML = jsonData.msg.fahrenheit_degree;
+				document.getElementById('temperature').innerHTML = (jsonData.msg.fahrenheit_degree-32)/1.8 + '℃';
 
 
             }, 'json');
