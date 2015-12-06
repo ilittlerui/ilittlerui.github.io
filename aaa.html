@@ -22,6 +22,35 @@
     <script src="//api.easylink.io/bower_components/ionic/js/ionic.bundle.min.js"></script>
     <script src="./js/jquery-2.1.3.js"></script>
     <script type="text/javascript" charset="utf-8">
+    var access_token = "19dd668c64f808d328d4f54fc5212a91";
+    //获取温度  https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91
+
+    function post(URL, PARAMS) {
+        var temp = document.createElement("form");
+        temp.action = URL;
+        temp.method = "post";
+        temp.style.display = "none";
+        for (var x in PARAMS) {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = PARAMS[x];
+            // alert(opt.name)      
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
+
+    //调用方法 如      
+    var getMessage = post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91', {
+        html: prnhtml,
+        cm1: 'sdsddsd',
+        cm2: 'haha'
+    });
+
+
+
     function test1() {
         var commond = '{"11":"' + 'flashnode' + '"}';
         console.log("test1");
@@ -32,39 +61,9 @@
     function test2() {
         var commond = '{"11":"' + 'off' + '"}';
         console.log("test2");
-        getTemperature();
+        getMessage();
     }
     document.querySelector('#test2').addEventListener('click', test2);
-
-
-    var access_token = "19dd668c64f808d328d4f54fc5212a91";
-    //获取温度  https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91
-
-    angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
-
-        var getTemperature = function() {
-            console.log("refresh device");
-
-            $http.post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?', null, {
-                headers: {
-                    'AUTHORIZATION': "token " + access_token
-                }
-            }).success(function(data) {
-
-                console.log("post success");
-
-                //$scope.items = [];
-                //$scope.items = items;
-
-                //console.log($scope.items);
-
-            }).error(function(data) {
-                alert(data.error.message);
-                return;
-            });
-
-        };
-    });
 
 
     console.log = (function(old_funct) {
