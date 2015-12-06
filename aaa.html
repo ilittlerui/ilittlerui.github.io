@@ -34,6 +34,12 @@
     //    cm2: null
     //});
 
+    function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
+
     $(function() {
         // 定义存放服务器返回值的变量
         var jsonData = null;
@@ -44,6 +50,11 @@
                 // 这里data就是返回的JSON对象
                 jsonData = data;
                 console.log(jsonData);
+
+                //{"status": 200, "msg": {"fahrenheit_degree": 75.2}}
+                console.log(jsonData.msg);
+                
+
             }, 'json');
         });
     });
