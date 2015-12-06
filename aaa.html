@@ -8,8 +8,6 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link href="" rel="stylesheet">
-    <script type="text/javascript" charset="utf-8">
-    </script>
 </head>
 
 <body>
@@ -27,8 +25,6 @@
     function test1() {
         var commond = '{"11":"' + 'flashnode' + '"}';
         console.log("test1");
-
-
     }
     document.querySelector('#test1').addEventListener('click', test1);
 
@@ -43,31 +39,32 @@
 
     var access_token = "19dd668c64f808d328d4f54fc5212a91";
     //获取温度  https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91
-    var getTemperature = function() {
-        console.log("refresh device");
 
-        $http.post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?', null, {
-            headers: {
-                'AUTHORIZATION': "token " + access_token
-            }
-        }).success(function(data) {
+    angular.module('ionicApp', ['ionic']).controller('MyCtrl', function($scope, $ionicPopup, $ionicListDelegate, $http) {
 
-            console.log("post success");
-            console.log(items);
+        var getTemperature = function() {
+            console.log("refresh device");
 
-            $scope.items = [];
-            $scope.items = items;
+            $http.post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?', null, {
+                headers: {
+                    'AUTHORIZATION': "token " + access_token
+                }
+            }).success(function(data) {
 
-            console.log($scope.items);
+                console.log("post success");
 
-        }).error(function(data) {
-            alert(data.error.message);
-            return;
-        });
+                //$scope.items = [];
+                //$scope.items = items;
 
-    };
+                //console.log($scope.items);
 
+            }).error(function(data) {
+                alert(data.error.message);
+                return;
+            });
 
+        };
+    });
 
 
     console.log = (function(old_funct) {
