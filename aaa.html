@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <h1>test</h1>
+    <h1 >test</h1>
+    <h1 id='temperature'></h1>
     <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
         <div class="button-bar">
             <a class="button" style="background:white; color:black" id="test1">test1</a>
@@ -53,6 +54,9 @@
 
                 //{"status": 200, "msg": {"fahrenheit_degree": 75.2}}
                 console.log(jsonData.msg);
+
+
+				document.getElementById('temperature').innerHTML = jsonData.msg.fahrenheit_degree;
 
 
             }, 'json');
