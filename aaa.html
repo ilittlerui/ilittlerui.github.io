@@ -43,7 +43,7 @@
             $.post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91', params, function(data) {
                 // 这里data就是返回的JSON对象
                 jsonData = data;
-                alert(jsonData.name);
+                console.log(jsonData);
             }, 'json');
         });
     });
