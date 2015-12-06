@@ -37,10 +37,10 @@
     $(function() {
         // 定义存放服务器返回值的变量
         var jsonData = null;
-        $('#submitBtn').click(function() {
+        $('#test2').click(function() {
             // 请求的参数
             var params = {};
-            $.post('json.json', params, function(data) {
+            $.post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91', params, function(data) {
                 // 这里data就是返回的JSON对象
                 jsonData = data;
                 alert(jsonData.name);
