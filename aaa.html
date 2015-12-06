@@ -25,29 +25,29 @@
     var access_token = "19dd668c64f808d328d4f54fc5212a91";
     //获取温度  https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91
 
-    function post(URL, PARAMS) {
-        var temp = document.createElement("form");
-        temp.action = URL;
-        temp.method = "post";
-        temp.style.display = "none";
-        for (var x in PARAMS) {
-            var opt = document.createElement("textarea");
-            opt.name = x;
-            opt.value = PARAMS[x];
-            // alert(opt.name)      
-            temp.appendChild(opt);
-        }
-        document.body.appendChild(temp);
-        temp.submit();
-        return temp;
-    }
+
 
     //调用方法 如      
-    var getMessage = post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91', {
-        html: null,
-        cm1: null,
-        cm2: null
+    //var getMessage = post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91', {
+    //    html: null,
+    //    cm1: null,
+    //    cm2: null
+    //});
+
+    $(function() {
+        // 定义存放服务器返回值的变量
+        var jsonData = null;
+        $('#submitBtn').click(function() {
+            // 请求的参数
+            var params = {};
+            $.post('json.json', params, function(data) {
+                // 这里data就是返回的JSON对象
+                jsonData = data;
+                alert(jsonData.name);
+            }, 'json');
+        });
     });
+
 
 
 
@@ -61,7 +61,7 @@
     function test2() {
         var commond = '{"11":"' + 'off' + '"}';
         console.log("test2");
-        var testaaa= getMessage();
+        var testaaa = getMessage();
         console.log(testaaa);
     }
     document.querySelector('#test2').addEventListener('click', test2);
