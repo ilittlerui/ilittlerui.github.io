@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Wio Link</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+</head>
+
+<body>
+    <h1 >test</h1>
+    <h1 id='temperature'></h1>
+    <div class="bar-footer" style="bottom:0;position:absolute;width:100%">
+        <div class="button-bar">
+            <a class="button" style="background:white; color:black" id="test1">test1</a>
+            <a class="button" style="background:black; color:white" id="test2">test2</a>
+        </div>
+    </div>
+    <link href="//code.ionicframework.com/1.0.0-beta.13/css/ionic.css" rel="stylesheet">
+    <script src="//api.easylink.io/bower_components/ionic/js/ionic.bundle.min.js"></script>
+    <script src="./js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    var access_token = "19dd668c64f808d328d4f54fc5212a91";
+    //获取温度  https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91
+
+
+
+    //调用方法 如      
+    //var getMessage = post('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91', {
+    //    html: null,
+    //    cm1: null,
+    //    cm2: null
+    //});
+
+    function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
+
+    $(function() {
+        // 定义存放服务器返回值的变量
+        var jsonData = null;
+        $('#test2').click(function() {
+            // 请求的参数
+            var params = {};
+            $.get('https://iot.seeed.cc/v1/node/GroveTempHumDigital0/temperature_f?access_token=19dd668c64f808d328d4f54fc5212a91', params, function(data) {
+                // 这里data就是返回的JSON对象
+                jsonData = data;
+                console.log(jsonData);
+
+                //{"status": 200, "msg": {"fahrenheit_degree": 75.2}}
+                console.log(jsonData.msg);
+
+
+				document.getElementById('temperature').innerHTML = ((jsonData.msg.fahrenheit_degree-32)/1.8).toFixed(2) + '℃';
+
+
+            }, 'json');
+        });
+    });
+
+
+
+
+    function test1() {
+        var commond = '{"11":"' + 'flashnode' + '"}';
+        console.log("test1");
+    }
+    document.querySelector('#test1').addEventListener('click', test1);
+
+    //led off
+    /*
+    function test2() {
+        var commond = '{"11":"' + 'off' + '"}';
+        console.log("test2");
+        
+        console.log("testaaa");
+    }
+    document.querySelector('#test2').addEventListener('click', test2);
+	*/
+
+    console.log = (function(old_funct) {
+        return function(text) {
+            old_funct(text);
+        };
+    }(console.log.bind(console)));
+    console.error = console.debug = console.info = console.log;
+    </script>
+</body>
+
+</html>
